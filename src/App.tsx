@@ -1,14 +1,15 @@
 import "./App.css";
+import Header from "./components/Header";
+import Note from "./components/Note";
+import NoteList from "./components/NoteList";
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1>Suacode Notes App</h1>
-      </header>
+      <Header />
       <main>
-        <article>List Notes here</article>
-        <article>Conditional render slected note here</article>
+        <NoteList />
+        <Note />
       </main>
       <footer>
         <p>Made by Patrick with ❤ &copy;2022</p>
