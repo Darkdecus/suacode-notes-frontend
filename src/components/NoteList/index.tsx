@@ -1,7 +1,12 @@
 import React from "react";
+import { StyledList } from "./NoteList";
 
 function NoteList() {
-  return <article>List Notes here</article>;
+  return (
+    <StyledList>
+      <li>No Notes yet</li>
+    </StyledList>
+  );
 }
 
 export default NoteList;

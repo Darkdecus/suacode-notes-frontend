@@ -5,16 +5,16 @@ import NoteList from "./components/NoteList";
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Header />
-      <main>
+      <div className="content-area">
         <NoteList />
         <Note />
-      </main>
+      </div>
       <footer>
         <p>Made by Patrick with ❤ &copy;2022</p>
       </footer>
-    </div>
+    </main>
   );
 }
 
