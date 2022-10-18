@@ -9,7 +9,7 @@ function App() {
       <Header />
       <div className="content-area">
         <NoteList />
-        <Note />
+        {/* <Note /> */}
       </div>
       <footer>
         <p>Made by Patrick with ❤ &copy;2022</p>
