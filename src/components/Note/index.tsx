@@ -1,7 +1,22 @@
-import React from "react";
+import { StyledFooter, StyledNote, StyledText, StyledTitle } from "./Note";
 
-function Note() {
-  return <article>Conditional render slected note here</article>;
+interface IProps {
+  note: {
+    title: string;
+    body: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
+  };
+}
+
+function Note({ note: { title, body, createdAt, updatedAt } }: IProps) {
+  return (
+    <StyledNote>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledText>{body}</StyledText>
+      <StyledFooter></StyledFooter>
+    </StyledNote>
+  );
 }
 
 export default Note;
