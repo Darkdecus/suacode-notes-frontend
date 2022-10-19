@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { MutableRefObject, RefObject, useRef, useState } from "react";
 import IconBtn from "../IconBtn";
 import {
   Overlay,
@@ -21,11 +21,25 @@ function NewNote({ handler }: IProps) {
     type: "success",
   });
 
-  const formRef = useRef<HTMLFormElement | null>();
+  const formRef = useRef<any>(null);
+
+  const validation = () => {
+    if (!title)
+      return setMsg({
+        text: "title is a required field",
+        type: "error",
+      });
+    if (!body)
+      return setMsg({
+        text: "body is a required field",
+        type: "error",
+      });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let res: any;
+    validation();
     try {
       res = await fetch("http://localhost:5000/notes", {
         method: "POST",
@@ -55,16 +69,14 @@ function NewNote({ handler }: IProps) {
 
   return (
     <Overlay>
-      <StyledForm
-        ref={(ref) => (formRef.current = ref)}
-        onSubmit={handleSubmit}
-      >
+      <StyledForm ref={formRef} onSubmit={handleSubmit}>
         <IconBtn icon="arrow_back" handler={handler} />
         <h2>Add New Note</h2>
         {msg.text && <StyledMsg type={msg.type}>{msg.text}</StyledMsg>}
         <StyledTextbox
           type="text"
           placeholder="Type title here ..."
+          required
           name="title"
           id="title"
           value={title}
@@ -72,6 +84,7 @@ function NewNote({ handler }: IProps) {
         />
         <StyledTextArea
           placeholder="Type your note here ..."
+          required
           name="body"
           id="body"
           value={body}
