@@ -3,11 +3,13 @@ import "./App.css";
 import Header from "./components/Header";
 import Note from "./components/Note";
 import NoteList from "./components/NoteList";
+import { useNotes } from "./hooks/useNotes";
 
 function App() {
   const [selectedNote, setSelectedNote] = useState<string | number | null>(
     null
   );
+  const { notes } = useNotes();
 
   const clearNoteSelection = () => setSelectedNote(null);
 
