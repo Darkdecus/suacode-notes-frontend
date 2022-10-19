@@ -24,6 +24,27 @@ export const ListWrapper = styled.article`
   padding: 0.25rem 0.5rem;
   margin: 0;
 
+  & > h2 {
+    display: flex;
+    align-items: center;
+    & > button {
+      & > span {
+        font-size: 2rem;
+      }
+      transition: ease-out 450ms;
+      margin-left: 20px;
+      height: 60px;
+      width: 60px;
+      background-color: #0c4c69;
+      color: #fff;
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        color: #0c4c69;
+      }
+    }
+  }
+
   @media screen and (min-width: 300px) {
     display: ${(props: { noteId: string | number | null }) =>
       props.noteId ? "none" : "flex"};

@@ -1,5 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import AddNoteSVG from "../AddNoteSVG";
 import { INote } from "../dtos/Note.dto";
+import IconBtn from "../IconBtn";
+import NewNote from "../NewNote";
 import ListItem from "./ListItem";
 import { ListWrapper, StyledList } from "./NoteList";
 
@@ -10,21 +13,24 @@ interface IProps {
 }
 
 function NoteList({ selectedNote, setSelectedNote, notes }: IProps) {
-  // const handleClick = (id: string | number) => {
-  //   setSelectedNote(id);
-  //   return (e: any) => {
-  //     console.log("click was called");
-  //   };
-  // };
+  const [newNote, setNewNote] = useState<boolean>(false);
 
   return (
     <ListWrapper noteId={selectedNote}>
-      <h2>Notes</h2>
-      <StyledList>
-        {notes.map((note) => (
-          <ListItem key={note._id} handler={setSelectedNote} note={note} />
-        ))}
-      </StyledList>
+      <h2>
+        Notes
+        <IconBtn icon="add" handler={() => setNewNote(true)}></IconBtn>
+      </h2>
+      {newNote && <NewNote />}
+      {notes.length ? (
+        <StyledList>
+          {notes.map((note) => (
+            <ListItem key={note._id} handler={setSelectedNote} note={note} />
+          ))}
+        </StyledList>
+      ) : (
+        <AddNoteSVG />
+      )}
     </ListWrapper>
   );
 }
