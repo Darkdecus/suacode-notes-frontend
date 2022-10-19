@@ -12,11 +12,8 @@
   display: flex
 }
 
-.content-area.with-selection {
-  flex-direction: row;
-}
-
 .App>footer {
+  margin-top: auto;
   height: 15vh;
   justify-self: flex-end;
   width: 100%;

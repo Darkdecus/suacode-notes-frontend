@@ -1,7 +1,8 @@
 import { MouseEventHandler } from "react";
+import IconBtn from "../IconBtn";
 import {
-  StyledClearBtn,
   StyledFooter,
+  StyledFooterContainer,
   StyledNote,
   StyledText,
   StyledTitle,
@@ -23,15 +24,25 @@ function Note({
 }: IProps) {
   return (
     <StyledNote>
-      <StyledClearBtn
-        className="material-icons-outlined"
-        onClick={closeHandler}
-      >
-        arrow_back
-      </StyledClearBtn>
+      <IconBtn
+        // className="material-icons-outlined"
+        handler={closeHandler}
+        icon="arrow_back"
+      />
       <StyledTitle>{title}</StyledTitle>
       <StyledText>{body}</StyledText>
-      <StyledFooter></StyledFooter>
+      <StyledFooter>
+        <StyledFooterContainer>
+          <p>
+            <b>Created on</b> <br /> {new Date(createdAt).toDateString()}
+          </p>
+        </StyledFooterContainer>
+        <StyledFooterContainer>
+          <p>
+            <b>Last updated</b> <br /> {new Date(updatedAt).toDateString()}
+          </p>
+        </StyledFooterContainer>
+      </StyledFooter>
     </StyledNote>
   );
 }

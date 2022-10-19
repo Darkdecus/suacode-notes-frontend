@@ -10,32 +10,20 @@ function App() {
     null
   );
   const { notes } = useNotes();
+  const note = notes.find((note) => note._id === selectedNote);
 
   const clearNoteSelection = () => setSelectedNote(null);
 
   return (
     <main className="App">
       <Header />
-      <div
-        className={`content-area ${
-          selectedNote ? "with-selection" : undefined
-        }`}
-      >
+      <div className="content-area">
         <NoteList
           selectedNote={selectedNote}
           setSelectedNote={setSelectedNote}
+          notes={notes}
         />
-        {selectedNote && (
-          <Note
-            closeHandler={clearNoteSelection}
-            note={{
-              title: "The title of the note",
-              body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam culpa, at maiores quae deserunt eveniet ullam rerum dignissimos commodi asperiores odio sit quos accusantium ab. Quod, numquam. Error, amet optio.",
-              createdAt: new Date(Date.now()),
-              updatedAt: new Date(Date.now()),
-            }}
-          />
-        )}
+        {note && <Note closeHandler={clearNoteSelection} note={note} />}
       </div>
       <footer>
         <p>Made by Patrick with ❤ &copy;2022</p>
