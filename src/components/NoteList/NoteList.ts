@@ -20,7 +20,8 @@ export const ListWrapper = styled.article`
   align-items: center;
   justify-content: flex-start;
   height: 75vh;
-  width: 100%;
+  width: ${(props: { noteId: string | number | null }) =>
+    props.noteId ? "20%" : "100%"};
   padding: 0.25rem 0.5rem;
   margin: 0;
 `;

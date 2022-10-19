@@ -1,6 +1,14 @@
-import { StyledFooter, StyledNote, StyledText, StyledTitle } from "./Note";
+import { MouseEventHandler } from "react";
+import {
+  StyledClearBtn,
+  StyledFooter,
+  StyledNote,
+  StyledText,
+  StyledTitle,
+} from "./Note";
 
 interface IProps {
+  closeHandler: MouseEventHandler<HTMLButtonElement>;
   note: {
     title: string;
     body: string;
@@ -9,9 +17,18 @@ interface IProps {
   };
 }
 
-function Note({ note: { title, body, createdAt, updatedAt } }: IProps) {
+function Note({
+  closeHandler,
+  note: { title, body, createdAt, updatedAt },
+}: IProps) {
   return (
     <StyledNote>
+      <StyledClearBtn
+        className="material-icons-outlined"
+        onClick={closeHandler}
+      >
+        arrow_back
+      </StyledClearBtn>
       <StyledTitle>{title}</StyledTitle>
       <StyledText>{body}</StyledText>
       <StyledFooter></StyledFooter>
