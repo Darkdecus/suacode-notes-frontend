@@ -21,7 +21,7 @@ function NoteList({ selectedNote, setSelectedNote, notes }: IProps) {
         Notes
         <IconBtn icon="add" handler={() => setNewNote(true)}></IconBtn>
       </h2>
-      {newNote && <NewNote />}
+      {newNote && <NewNote handler={() => setNewNote(false)} />}
       {notes.length ? (
         <StyledList>
           {notes.map((note) => (

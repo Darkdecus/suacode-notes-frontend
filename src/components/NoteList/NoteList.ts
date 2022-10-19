@@ -35,12 +35,12 @@ export const ListWrapper = styled.article`
       margin-left: 20px;
       height: 60px;
       width: 60px;
-      background-color: #0c4c69;
+      background-color: var(--primary-color);
       color: #fff;
       &:hover,
       &:focus {
         background-color: #fff;
-        color: #0c4c69;
+        color: var(--primary-color);
       }
     }
   }

@@ -15,7 +15,7 @@ export const StyledListItem = styled.li`
   &:hover,
   &:focus {
     border-color: transparent;
-    box-shadow: 0 0 5px 0px #d7d7d7;
+    box-shadow: var(--shadow);
   }
 
   & > span {
@@ -26,7 +26,7 @@ export const StyledListItem = styled.li`
     &:hover,
     &:focus {
       padding: 0.3rem;
-      box-shadow: 0 0 5px 0px #d7d7d7;
+      box-shadow: var(--shadow);
       color: #2f78b2;
     }
   }
