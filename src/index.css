@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  --shadow-color: #d7d7d7;
+  --shadow: 0 0 5px 0px var(--shadow-color);
 }
 
 body {
