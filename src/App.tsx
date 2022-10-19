@@ -21,7 +21,7 @@ function App() {
         <NoteList
           selectedNote={selectedNote}
           setSelectedNote={setSelectedNote}
-          notes={notes}
+          notes={notes || []}
         />
         {note && <Note closeHandler={clearNoteSelection} note={note} />}
       </div>
