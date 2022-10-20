@@ -49,7 +49,7 @@ function Note({
         </StyledFooterContainer>
         <StyledFooterContainer>
           <p>
-            <b>Last updated</b> <br /> {new Date(updatedAt).toDateString()}
+            <b>Last updated</b> <br /> {new Date(updatedAt).toUTCString()}
           </p>
         </StyledFooterContainer>
       </StyledFooter>
