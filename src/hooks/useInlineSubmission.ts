@@ -44,7 +44,7 @@ export const useInlineSubmission = (
           setMsg({ type: "success", text: name + " updated" });
           setTimeout(() => {
             setMsg((msg) => ({ ...msg, text: "" }));
-          }, 1000);
+          }, 1500);
           return;
         } else {
           setStatus("failed");
