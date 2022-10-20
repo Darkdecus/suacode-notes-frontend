@@ -1,4 +1,4 @@
-import React, { MutableRefObject, RefObject, useRef, useState } from "react";
+import React, { useState } from "react";
 import IconBtn from "../IconBtn";
 import {
   Overlay,
@@ -20,8 +20,6 @@ function NewNote({ handler }: IProps) {
     text: "",
     type: "success",
   });
-
-  const formRef = useRef<any>(null);
 
   const validation = () => {
     if (!title)
@@ -50,7 +48,8 @@ function NewNote({ handler }: IProps) {
       });
       if (res.ok) {
         setTimeout(() => {
-          formRef.current && formRef.current.reset();
+          setTitle("");
+          setBody("");
         }, 2000);
         setMsg({
           text: "Note saved",
@@ -69,7 +68,7 @@ function NewNote({ handler }: IProps) {
 
   return (
     <Overlay>
-      <StyledForm ref={formRef} onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <IconBtn icon="arrow_back" handler={handler} />
         <h2>Add New Note</h2>
         {msg.text && <StyledMsg type={msg.type}>{msg.text}</StyledMsg>}
