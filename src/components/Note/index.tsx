@@ -22,7 +22,13 @@ function Note({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    await fetch("http://localhost:5000/notes/" + _id, { method: "DELETE" });
+    await fetch(
+      ((process.env.NODE_ENV === "production"
+        ? process.env.REACT_APP_BACKEND_URL_PROD
+        : process.env.REACT_APP_BACKEND_URL_DEV) ||
+        "http://localhost:5000/notes/") + _id,
+      { method: "DELETE" }
+    );
     setTimeout(() => {
       closeHandler(e);
     }, 1000);

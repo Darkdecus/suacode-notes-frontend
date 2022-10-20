@@ -43,7 +43,10 @@ function UpdateNote({ handler, titles, note }: IProps) {
     onChange: changeTitle,
     msg: titleMsg,
   } = useInlineSubmission(
-    "http://localhost:5000/notes/" + note._id,
+    ((process.env.NODE_ENV === "production"
+      ? process.env.REACT_APP_BACKEND_URL_PROD
+      : process.env.REACT_APP_BACKEND_URL_DEV) ||
+      "http://localhost:5000/notes/") + note._id,
     "title",
     note.title,
     validateTitle
@@ -53,7 +56,10 @@ function UpdateNote({ handler, titles, note }: IProps) {
     onChange: changeBody,
     msg: bodyMsg,
   } = useInlineSubmission(
-    "http://localhost:5000/notes/" + note._id,
+    ((process.env.NODE_ENV === "production"
+      ? process.env.REACT_APP_BACKEND_URL_PROD
+      : process.env.REACT_APP_BACKEND_URL_DEV) ||
+      "http://localhost:5000/notes/") + note._id,
     "body",
     note.body,
     validateBody
