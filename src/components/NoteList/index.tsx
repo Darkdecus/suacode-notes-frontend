@@ -15,15 +15,18 @@ interface IProps {
 
 function NoteList({ selectedNote, setSelectedNote, notes }: IProps) {
   const [newNote, setNewNote] = useState<boolean>(false);
-  const [updateForm, setUpdateForm] = useState<INote | null>(null);
+  const [updateFormId, setUpdateFormId] = useState<string | number | null>(
+    null
+  );
+  const updateForm = notes.find((note) => note._id === updateFormId);
   const showForm =
     (note: INote) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
       e.stopPropagation();
-      setUpdateForm(note);
+      setUpdateFormId(note._id);
     };
   const hideForm = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     e.stopPropagation();
-    setUpdateForm(null);
+    setUpdateFormId(null);
   };
   return (
     <ListWrapper noteId={selectedNote}>
