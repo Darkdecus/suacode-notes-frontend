@@ -39,6 +39,7 @@ function NewNote({ handler }: IProps) {
     let res: any;
     validation();
     try {
+      if (msg.text) return;
       res = await fetch("http://localhost:5000/notes", {
         method: "POST",
         headers: {
@@ -50,7 +51,8 @@ function NewNote({ handler }: IProps) {
         setTimeout(() => {
           setTitle("");
           setBody("");
-        }, 2000);
+          setMsg((msg) => ({ ...msg, text: "" }));
+        }, 1000);
         setMsg({
           text: "Note saved",
           type: "success",
@@ -79,7 +81,10 @@ function NewNote({ handler }: IProps) {
           name="title"
           id="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setMsg((msg) => ({ ...msg, text: "" }));
+            setTitle(e.target.value);
+          }}
         />
         <StyledTextArea
           placeholder="Type your note here ..."
@@ -87,7 +92,10 @@ function NewNote({ handler }: IProps) {
           name="body"
           id="body"
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={(e) => {
+            setMsg((msg) => ({ ...msg, text: "" }));
+            setBody(e.target.value);
+          }}
         />
         <StyledSubmitBtn type="submit" id="submit">
           Save
