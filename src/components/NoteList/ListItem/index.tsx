@@ -1,23 +1,38 @@
 import { Dispatch, SetStateAction } from "react";
-import { StyledDate, StyledListItem, StyledTitle } from "./ListItem";
+import { INote } from "../../dtos/Note.dto";
+import IconBtn from "../../IconBtn";
+import {
+  StyledDate,
+  StyledIconWapper,
+  StyledListItem,
+  StyledTitle,
+} from "./ListItem";
 
 interface IProps {
-  note: {
-    _id: string | number;
-    title: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
-  };
+  note: INote;
   handler: Dispatch<SetStateAction<string | number | null>>;
+  showForm: any;
 }
 
-function ListItem({ note: { _id, title, createdAt }, handler }: IProps) {
+function ListItem({ note, handler, showForm }: IProps) {
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    await fetch("http://localhost:5000/notes/" + note._id, {
+      method: "DELETE",
+    });
+  };
+
   return (
-    <StyledListItem onClick={() => handler(_id)}>
-      <span className="material-icons-outlined">edit_note</span>
-      <StyledTitle>{title}</StyledTitle>
+    <StyledListItem onClick={(e) => handler(note._id)}>
+      <StyledIconWapper>
+        <IconBtn icon="edit_note" handler={showForm} />
+        <IconBtn icon="delete_outline" handler={handleDelete} />
+      </StyledIconWapper>
+      <StyledTitle>{note.title}</StyledTitle>
       <StyledDate>
-        Last updated on {new Date(createdAt).toDateString()}
+        Last updated on {new Date(note.createdAt).toDateString()}
       </StyledDate>
     </StyledListItem>
   );

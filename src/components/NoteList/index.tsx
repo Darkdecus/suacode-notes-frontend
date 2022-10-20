@@ -3,6 +3,7 @@ import AddNoteSVG from "../AddNoteSVG";
 import { INote } from "../dtos/Note.dto";
 import IconBtn from "../IconBtn";
 import NewNote from "../NewNote";
+import UpdateNote from "../UpdateNote";
 import ListItem from "./ListItem";
 import { ListWrapper, StyledList } from "./NoteList";
 
@@ -14,9 +15,28 @@ interface IProps {
 
 function NoteList({ selectedNote, setSelectedNote, notes }: IProps) {
   const [newNote, setNewNote] = useState<boolean>(false);
-
+  const [updateForm, setUpdateForm] = useState<INote | null>(null);
+  const showForm =
+    (note: INote) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      e.stopPropagation();
+      setUpdateForm(note);
+    };
+  const hideForm = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    e.stopPropagation();
+    setUpdateForm(null);
+  };
   return (
     <ListWrapper noteId={selectedNote}>
+      {updateForm && (
+        <UpdateNote
+          handler={hideForm}
+          note={updateForm}
+          titles={notes.reduce<string[]>(
+            (titles, note) => [...titles, note.title],
+            []
+          )}
+        />
+      )}
       <h2>
         Notes
         <IconBtn icon="add" handler={() => setNewNote(true)}></IconBtn>
@@ -25,7 +45,12 @@ function NoteList({ selectedNote, setSelectedNote, notes }: IProps) {
       {notes.length ? (
         <StyledList>
           {notes.map((note) => (
-            <ListItem key={note._id} handler={setSelectedNote} note={note} />
+            <ListItem
+              key={note._id}
+              handler={setSelectedNote}
+              note={note}
+              showForm={showForm(note)}
+            />
           ))}
         </StyledList>
       ) : (

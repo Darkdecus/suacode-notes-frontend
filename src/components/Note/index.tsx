@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { INote } from "../dtos/Note.dto";
 import IconBtn from "../IconBtn";
 import {
   StyledFooter,
@@ -10,26 +11,29 @@ import {
 
 interface IProps {
   closeHandler: MouseEventHandler<HTMLButtonElement>;
-  note: {
-    title: string;
-    body: string;
-    createdAt: string | Date;
-    updatedAt: string | Date;
-  };
+  note: INote;
 }
 
 function Note({
   closeHandler,
-  note: { title, body, createdAt, updatedAt },
+  note: { _id, title, body, createdAt, updatedAt },
 }: IProps) {
+  const handleDelete = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    await fetch("http://localhost:5000/notes/" + _id, { method: "DELETE" });
+    setTimeout(() => {
+      closeHandler(e);
+    }, 1000);
+  };
   return (
     <StyledNote>
-      <IconBtn
-        // className="material-icons-outlined"
-        handler={closeHandler}
-        icon="arrow_back"
-      />
-      <StyledTitle>{title}</StyledTitle>
+      <IconBtn handler={closeHandler} icon="arrow_back" />
+      <StyledTitle>
+        {title}
+        <IconBtn icon="delete_outline" handler={handleDelete} />
+      </StyledTitle>
       <StyledText>{body}</StyledText>
       <StyledFooter>
         <StyledFooterContainer>

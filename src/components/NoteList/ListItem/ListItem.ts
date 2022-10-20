@@ -18,7 +18,20 @@ export const StyledListItem = styled.li`
     box-shadow: var(--shadow);
   }
 
-  & > span {
+  & p {
+    width: 100%;
+    display: block;
+  }
+`;
+
+export const StyledIconWapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+
+  & > button {
     transition: ease-out 350ms color, ease-out 350ms box-shadow;
     align-self: flex-end;
     padding: 0.2rem;
@@ -30,9 +43,18 @@ export const StyledListItem = styled.li`
       color: #2f78b2;
     }
   }
-  & p {
-    width: 100%;
-    display: block;
+  & > button:first-of-type {
+    &:hover,
+    &:focus {
+      color: #2f78b2;
+    }
+  }
+
+  & > button:last-of-type {
+    &:hover,
+    &:focus {
+      color: var(--error-color);
+    }
   }
 `;
 

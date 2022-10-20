@@ -19,6 +19,10 @@ export const StyledTitle = styled.h2`
   width: 100%;
   font-size: 1.75rem;
   font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* justify-content: space-between; */
 `;
 
 export const StyledText = styled.p`
